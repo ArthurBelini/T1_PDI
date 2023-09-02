@@ -47,6 +47,10 @@ elif upper_abs > 179:  # Caso onde faixa de valores passa de 179
         hsv_image[mask_aux > 0, 0] + 90  # Inverter faixa excecao
     hsv_image[mask_abs > 0, 0] = \
         (hsv_image[mask_abs > 0, 0] - 90) % 180  # Inverter faixa padrao
+    
+else:  # Caso onde somente faixa padrao possui valores
+    hsv_image[mask_abs > 0, 0] = \
+        (hsv_image[mask_abs > 0, 0] + 90) % 180  # Inverter faixa padrao
 
 
 # Finalização
