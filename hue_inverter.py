@@ -20,7 +20,7 @@ m = check(args.m, 0, 359, 'm')
 x = check(args.x, 0, 179, 'x')
 
 if not os.path.isfile(args.image):
-    print(f"Argumento \'image\' invalido!")
+    print(f"Caminho da imagem não encontrado!")
     exit()
 
 lower_abs = (m - x) // 2  # Correção de valores para 8 bits
