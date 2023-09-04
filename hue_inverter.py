@@ -1,30 +1,35 @@
 import os
 import cv2
+import argparse
+
 import numpy as np
 
 from utils import *
 
 
 # Inicialização
-image_path = 'disco_hue.png'
-# image_path = 'carro_azul.png'
-# image_path = 'carro_vermelho.jpg'
+parser = argparse.ArgumentParser(description="Inverter Faixa de Valores Hue")
 
-m = ler(0, 359)
-x = ler(0, 179)
+parser.add_argument("-m", "--m", required=True, type=int, help="Valor do hue (int entre 0-359)")
+parser.add_argument("-x", "--x", required=True, type=int, help="Tamanho da faixa (int entre 0-179)")
+parser.add_argument("-i", "--image", required=True, type=str, help="Caminho da imagem (string)")
+
+args = parser.parse_args()
+
+m = check(args.m, 0, 359, 'm')
+x = check(args.x, 0, 179, 'x')
+
+if not os.path.isfile(args.image):
+    print(f"Argumento \'image\' invalido!")
+    exit()
 
 lower_abs = (m - x) // 2  # Correção de valores para 8 bits
 upper_abs = (m + x) // 2  # Correção de valores para 8 bits
 
 lower_aux = max(lower_abs, 0)  # Limite inferior da faixa padrao
 upper_aux = min(upper_abs, 179)  # Limite superior da faixa padrao
-    
 
-if not os.path.isfile(image_path):
-    print("Imagem não encontrada!")
-    exit()
-
-original_image = cv2.imread(image_path)
+original_image = cv2.imread(args.image)
 hsv_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2HSV)
 hsv_channel = hsv_image[:, :, 0]
 

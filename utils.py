@@ -1,13 +1,12 @@
 import cv2
 import numpy as np
 
-def ler(x, y):
-    while True:
-        z = int(input(f"Digite um numero de {x}-{y}: "))
-        if x <= z <= y:
-            break
-
-    return z
+def check(arg, lower_limit, upper_limit, msg):
+    if not lower_limit <= arg <= upper_limit:
+        print(f"Argumento \'{msg}\' invalido!")
+        exit()
+    
+    return arg
 
 def invert_range(channel, lower, upper, sign=1):
     mask = cv2.inRange(channel, lower, upper)
