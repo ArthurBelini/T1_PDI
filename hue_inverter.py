@@ -10,14 +10,14 @@ from utils import *
 # Inicialização
 parser = argparse.ArgumentParser(description="Inverter Faixa de Valores Hue")
 
-parser.add_argument("-m", "--m", required=True, type=int, help="Valor do hue (int entre 0-359)")
-parser.add_argument("-x", "--x", required=True, type=int, help="Tamanho da faixa (int entre 0-179)")
+parser.add_argument("-m", required=True, type=int, help="Valor do hue (int entre 0-359)")
+parser.add_argument("-x", required=True, type=int, help="Tamanho da faixa (int entre 0-179)")
 parser.add_argument("-i", "--image", required=True, type=str, help="Caminho da imagem (string)")
 
 args = parser.parse_args()
 
-m = check(args.m, 0, 359, 'm')
-x = check(args.x, 0, 179, 'x')
+m = check_valid(args.m, 0, 359, 'm')
+x = check_valid(args.x, 0, 179, 'x')
 
 if not os.path.isfile(args.image):
     print(f"Caminho da imagem não encontrado!")

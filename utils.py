@@ -1,9 +1,8 @@
 import cv2
-import numpy as np
 
-def check(arg, lower_limit, upper_limit, msg):
+def check_valid(arg, lower_limit, upper_limit, msg):
     if not lower_limit <= arg <= upper_limit:
-        print(f"Argumento \"{msg}\" invalido ({lower_limit}-{upper_limit})!")
+        print(f"Argumento \'{msg}\' invalido ({lower_limit}-{upper_limit})!")
         exit()
     
     return arg
